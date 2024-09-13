@@ -26,6 +26,9 @@ public class Pessoa {
     private String email;
     private String fone;
 
+    @Column(name = "is_active")
     private Boolean isActive;
-    private LocalDateTime createdAt;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt = LocalDateTime.now(); //Já deixando a data ser iniciada na criação da entidade;
 }
