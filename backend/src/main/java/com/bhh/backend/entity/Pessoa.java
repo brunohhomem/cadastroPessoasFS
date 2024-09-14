@@ -1,5 +1,6 @@
 package com.bhh.backend.entity;
 
+import com.bhh.backend.dto.PessoaInsertDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,4 +32,11 @@ public class Pessoa {
 
     @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now(); //Já deixando a data ser iniciada na criação da entidade;
+
+    public Pessoa(PessoaInsertDTO pessoaInsertDTO) {
+        this.nome = pessoaInsertDTO.nome();
+        this.sobrenome = pessoaInsertDTO.sobrenome();
+        this.email = pessoaInsertDTO.email();
+        this.fone = pessoaInsertDTO.fone();
+    }
 }
