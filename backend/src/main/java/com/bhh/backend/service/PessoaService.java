@@ -69,8 +69,11 @@ public class PessoaService {
         return ConvertePessoaDTO(pessoa);
     }
 
-    public void deletaPessoa(Long pessoaId){
-        pessoaRepository.deleteById(pessoaId);
+    public void deletarPessoa(Long pessoaId){
+        Pessoa pessoa = pessoaRepository.findById(pessoaId)
+                .orElseThrow(() -> new RuntimeException("Pessoa não encontrada"));
+
+        pessoaRepository.delete(pessoa);
     }
 
     private PessoaDisplayDTO ConvertePessoaDTO(Pessoa pessoa) {
