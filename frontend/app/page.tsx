@@ -1,3 +1,7 @@
+// import PessoaCard from '@/components/pessoa-card'
+import PessoaList from '@/components/pessoa-list'
+
 export default function Home() {
-  return <h1>Olá</h1>
+  return <PessoaList />
+  // return <PessoaCard />
 }
