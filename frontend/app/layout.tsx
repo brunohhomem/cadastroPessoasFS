@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import './globals.css'
 import BotaoInserir from '@/components/botao-inserir'
-import Footer from '@/components/footer'
+// import Footer from '@/components/footer'
 import Header from '@/components/header'
 import BotaoReload from '@/components/botao-reload'
 
@@ -36,7 +36,7 @@ export default function RootLayout({
         {children}
         <BotaoInserir />
         <BotaoReload />
-        <Footer />
+        {/* <Footer /> */}
       </body>
     </html>
   )

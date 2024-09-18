@@ -1,10 +1,11 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
-import { PessoaDisplayDTO } from '../types/pessoa'
+import { useEffect, useState } from 'react'
 import { listarPessoas } from '@/services/pessoa-service'
+import { PessoaDisplayDTO } from '@/types/pessoa'
+import PessoaCard from './pessoa-card'
 
-const PessoaList: React.FC = () => {
+export default function PessoaList() {
   const [pessoas, setPessoas] = useState<PessoaDisplayDTO[]>([])
 
   useEffect(() => {
@@ -17,17 +18,10 @@ const PessoaList: React.FC = () => {
   }, [])
 
   return (
-    <div>
-      <h1>Lista de Pessoas</h1>
-      <ul>
-        {pessoas.map(pessoa => (
-          <li key={pessoa.id}>
-            {pessoa.nome} {pessoa.sobrenome} - {pessoa.email}
-          </li>
-        ))}
-      </ul>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      {pessoas.map(pessoa => (
+        <PessoaCard key={pessoa.id} pessoa={pessoa} />
+      ))}
     </div>
   )
 }
-
-export default PessoaList
