@@ -20,10 +20,7 @@ export default function BotaoInserir() {
         <Plus />
       </Button>
 
-      <Modal isOpen={isModalOpen} onClose={closeModal}>
-        <h1 className="text-lg font-semibold">Conteúdo do Modal</h1>
-        <p className="mt-2 text-gray-600">Este é um modal simples.</p>
-      </Modal>
+      <Modal isOpen={isModalOpen} onClose={closeModal}></Modal>
     </div>
   )
 }

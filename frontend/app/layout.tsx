@@ -4,6 +4,7 @@ import './globals.css'
 import BotaoInserir from '@/components/botao-inserir'
 import Footer from '@/components/footer'
 import Header from '@/components/header'
+import BotaoReload from '@/components/botao-reload'
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -34,6 +35,7 @@ export default function RootLayout({
         <Header />
         {children}
         <BotaoInserir />
+        <BotaoReload />
         <Footer />
       </body>
     </html>
