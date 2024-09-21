@@ -11,7 +11,9 @@ export default function PessoaList() {
   useEffect(() => {
     const fetchPessoas = async () => {
       const data = await listarPessoas()
-      setPessoas(data)
+      // Ordenar as pessoas pelo nome em ordem alfabética
+      const sortedData = data.sort((a, b) => a.nome.localeCompare(b.nome))
+      setPessoas(sortedData)
     }
 
     fetchPessoas()
