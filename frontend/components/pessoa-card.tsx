@@ -1,6 +1,6 @@
 'use client'
 
-import { PessoaDisplayDTO } from '@/types/pessoa'
+import { PessoaDisplayDTO, PessoaUpdateDTO } from '@/types/pessoa'
 import {
   Card,
   CardContent,
@@ -15,12 +15,12 @@ import {
   CircleX,
   Mail,
   Phone,
-  UserRoundPen,
-  UserX
+  Trash,
+  UserRoundPen
 } from 'lucide-react'
-import { Button } from './ui/button'
 import { useState } from 'react'
 import ModalAtualizarPessoa from './modal-update-pessoa'
+import { atualizarPessoa, deletarPessoa } from '@/services/pessoa-service'
 
 interface PessoaCardProps {
   pessoa: PessoaDisplayDTO
@@ -31,6 +31,34 @@ export default function PessoaCard({ pessoa }: PessoaCardProps) {
 
   const openModal = () => setIsModalOpen(true)
   const closeModal = () => setIsModalOpen(false)
+
+  // Função para excluir ou inativar a pessoa
+  const handleDeleteOrInactivate = async () => {
+    const confirmAction = confirm(
+      'Você realmente deseja excluir essa pessoa ou prefere inativá-la? \nOK para Excluir, Cancelar para Inativar.'
+    )
+
+    try {
+      if (confirmAction) {
+        // Se o usuário confirmar, excluir a pessoa
+        await deletarPessoa(pessoa.id)
+        alert('Pessoa excluída com sucesso!')
+      } else {
+        // Se o usuário cancelar, inativar a pessoa
+        const updateData: PessoaUpdateDTO = {
+          nome: pessoa.nome,
+          sobrenome: pessoa.sobrenome,
+          email: pessoa.email,
+          fone: pessoa.fone,
+          isActive: false // Inativar a pessoa
+        }
+        await atualizarPessoa(pessoa.id, updateData)
+        alert('Pessoa inativada com sucesso!')
+      }
+    } catch (error) {
+      console.error('Erro ao excluir ou inativar a pessoa', error)
+    }
+  }
 
   return (
     <>
@@ -69,12 +97,14 @@ export default function PessoaCard({ pessoa }: PessoaCardProps) {
         </CardContent>
         <CardFooter>
           <div className="flex gap-2">
-            <Button variant="destructive">
-              <UserX />
-            </Button>
-            <Button variant="secondary" onClick={openModal}>
-              <UserRoundPen />
-            </Button>
+            {/* Botão de editar */}
+            <UserRoundPen onClick={openModal} />
+
+            {/* Botão de excluir */}
+            <Trash
+              onClick={handleDeleteOrInactivate}
+              className="text-red-500 cursor-pointer"
+            />
           </div>
         </CardFooter>
       </Card>
