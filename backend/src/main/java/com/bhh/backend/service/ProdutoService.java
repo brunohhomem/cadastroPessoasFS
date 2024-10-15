@@ -24,4 +24,11 @@ public class ProdutoService {
                                                 produto.getCreatedAt()))
                 .collect(Collectors.toList()); // Coleta o Stream em uma Lista
     }
+
+    public ProdutoDisplayDTO buscarProduto(Long id){
+        Produto produto = produtoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+
+        return new ProdutoDisplayDTO(produto.getId(), produto.getDescricao(), produto.getCreatedAt());
+    }
 }
