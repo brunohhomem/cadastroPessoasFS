@@ -4,6 +4,7 @@ import com.bhh.backend.dto.PessoaDisplayDTO;
 import com.bhh.backend.dto.PessoaInsertDTO;
 import com.bhh.backend.dto.PessoaUpdateDTO;
 import com.bhh.backend.entity.Pessoa;
+import com.bhh.backend.exceptions.PessoaException;
 import com.bhh.backend.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class PessoaService {
 
     public PessoaDisplayDTO buscarPessoaId(Long pessoaId) {
         Pessoa pessoa = pessoaRepository.findById(pessoaId)
-                .orElseThrow(() -> new RuntimeException("Pessoa não encontrada"));
+                .orElseThrow(() -> new PessoaException("Pessoa não encontrada"));
 
         return ConvertePessoaDTO(pessoa);
     }
@@ -42,7 +43,7 @@ public class PessoaService {
 
     public PessoaDisplayDTO atualizarPessoa(Long pessoaId, PessoaUpdateDTO pessoaUpdateDTO) {
         Pessoa pessoa = pessoaRepository.findById(pessoaId)
-                .orElseThrow(() -> new RuntimeException("Pessoa não encontrada"));
+                .orElseThrow(() -> new PessoaException("Pessoa não encontrada"));
 
         if (!Objects.equals(pessoaUpdateDTO.nome(), pessoa.getNome())) {
             pessoa.setNome(pessoaUpdateDTO.nome());
@@ -69,9 +70,9 @@ public class PessoaService {
         return ConvertePessoaDTO(pessoa);
     }
 
-    public void deletarPessoa(Long pessoaId){
+    public void deletarPessoa(Long pessoaId) {
         Pessoa pessoa = pessoaRepository.findById(pessoaId)
-                .orElseThrow(() -> new RuntimeException("Pessoa não encontrada"));
+                .orElseThrow(() -> new PessoaException("Pessoa não encontrada"));
 
         pessoaRepository.delete(pessoa);
     }
