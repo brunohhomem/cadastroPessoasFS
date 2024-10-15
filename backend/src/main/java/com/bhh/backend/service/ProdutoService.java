@@ -1,6 +1,7 @@
 package com.bhh.backend.service;
 
 import com.bhh.backend.dto.ProdutoDisplayDTO;
+import com.bhh.backend.dto.ProdutoInsertDTO;
 import com.bhh.backend.entity.Produto;
 import com.bhh.backend.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +31,13 @@ public class ProdutoService {
                 .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
 
         return new ProdutoDisplayDTO(produto.getId(), produto.getDescricao(), produto.getCreatedAt());
+    }
+
+    public ProdutoDisplayDTO inserirProduto(ProdutoInsertDTO produtoInsertDTO) {
+        Produto novoProduto = new Produto(produtoInsertDTO);
+
+        novoProduto = produtoRepository.save(novoProduto);
+
+        return new ProdutoDisplayDTO(novoProduto.getId(), novoProduto.getDescricao(), novoProduto.getCreatedAt());
     }
 }
