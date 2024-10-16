@@ -45,19 +45,19 @@ public class PessoaService {
         Pessoa pessoa = pessoaRepository.findById(pessoaId)
                 .orElseThrow(() -> new PessoaException("Pessoa não encontrada"));
 
-        if (!Objects.equals(pessoaUpdateDTO.nome(), pessoa.getNome())) {
+        if (pessoaUpdateDTO.nome() != null && !pessoaUpdateDTO.nome().isEmpty() && !Objects.equals(pessoaUpdateDTO.nome(), pessoa.getNome())) {
             pessoa.setNome(pessoaUpdateDTO.nome());
         }
 
-        if (!Objects.equals(pessoaUpdateDTO.sobrenome(), pessoa.getSobrenome())) {
+        if (pessoaUpdateDTO.sobrenome() != null && !pessoaUpdateDTO.sobrenome().isEmpty() && !Objects.equals(pessoaUpdateDTO.sobrenome(), pessoa.getSobrenome())) {
             pessoa.setSobrenome(pessoaUpdateDTO.sobrenome());
         }
 
-        if (!Objects.equals(pessoaUpdateDTO.email(), pessoa.getEmail())) {
+        if (pessoaUpdateDTO.email() != null && !pessoaUpdateDTO.email().isEmpty() && !Objects.equals(pessoaUpdateDTO.email(), pessoa.getEmail())) {
             pessoa.setEmail(pessoaUpdateDTO.email());
         }
 
-        if (!Objects.equals(pessoaUpdateDTO.fone(), pessoa.getFone())) {
+        if (pessoaUpdateDTO.fone() != null && !pessoaUpdateDTO.fone().isEmpty() && !Objects.equals(pessoaUpdateDTO.fone(), pessoa.getFone())) {
             pessoa.setFone(pessoaUpdateDTO.fone());
         }
 
