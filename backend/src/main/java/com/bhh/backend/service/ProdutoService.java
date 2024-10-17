@@ -57,4 +57,8 @@ public class ProdutoService {
 
         return new ProdutoDisplayDTO(produto.getId(), produto.getDescricao(), produto.getCreatedAt());
     }
+
+    public void deletarProduto(Long produtoId) {
+        produtoRepository.deleteById(produtoId);
+    }
 }
