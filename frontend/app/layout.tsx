@@ -1,21 +1,15 @@
 import type { Metadata } from 'next'
-import localFont from 'next/font/local'
 import './globals.css'
 import BotaoInserir from '@/components/botao-inserir'
 // import Footer from '@/components/footer'
 import Header from '@/components/header'
 import BotaoReload from '@/components/botao-reload'
+import { Montserrat } from 'next/font/google'
 
-const geistSans = localFont({
-  src: './fonts/GeistVF.woff',
-  variable: '--font-geist-sans',
-  weight: '100 900'
+const font = Montserrat({
+    subsets: ['latin'],
 })
-const geistMono = localFont({
-  src: './fonts/GeistMonoVF.woff',
-  variable: '--font-geist-mono',
-  weight: '100 900'
-})
+
 
 export const metadata: Metadata = {
   title: 'Cadastro de Pessoas',
@@ -30,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang="PTbr">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={font.className}
       >
         <Header />
         {children}
